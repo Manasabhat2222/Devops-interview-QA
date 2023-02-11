@@ -7,7 +7,9 @@
     using Resource Access Manager 
 	
 3) customer has 50 (or) 100 odd aws accounts they are looking for a solution so that each and every single vpc can communicate with each other how you are going to establish that connectivity?
-     using Resource Access Manager
+   a) By creating transit gateway in one particular account, u can connect all VPC from different account to this transit gateway.
+   b) Also can establish VPN by setting up virtual private gateway in each VPC and configure VPN connection between gateway.
+   c) using Resource Access Manager
 	 
 4) customer has a physical side production environment (or) workloads are running on aws there is 1 particular Ip/CIDR which is continously hitting their environment multiple times in a day they are suspecting that a malicious activity they are asking you to block any kind of a traffic from a Ip/CIDR how you will going to block them?
       block that ip in security groups ex: 192.17.12.1/32
@@ -22,15 +24,19 @@
     AWS console---EC2 instance connect option or we create a .pemkey using helper instance
 	
 8) if you create a transit gateway what exactly you will define in attachments?
-     Attachment type: VPC,VPN,Peer connection,connect and VPC Attachment: DNS,IPv6
+     Attachment type: VPC,VPN,direct connect. 
+     If u select VPC, then u create transit gateway and add VPC id, subnet id. Transit gateway route will automatically be created. Then to each vpc route u add other vpc, to establish connection between the vpc.
 	 
 9) how your sharing the key  for a group of 4 members & these 4 members will be logged in from same username after 4/5 days customer complaining that a file deleted how can you track back who did what?
       to share a key will create a group and 4 users, then attach the users to that group and mail the same key to all 4 people,.....Next will track the user using cloud trail service in AWS
 	  
 10) what instances you are using in your project? why particular those instances?
-     we are using c2x.large and c5x.large it has good CPU and RAM (check the CPU and RAM size)
+     M xlarge and M 2xlarge
 	 
 11) customer is asking you to change the instances family to 2 ec2 instances which are part of the autoscalling groups siting on a load balancer & the condition is they are not looking for new instances and none of the instances to be deleted how your going to change the instance family of these 2 instances?
+change the instance type and create different of autoscaling group and attach this group. 
+stop each instance and chnage the instance type in load balancer.
+
 12)what kind of individual contribution load that you have played in your experiance on aws? what kind of issues you have resolved? what kind of troubleshooting you have performed?
 13) pre signed url in s3?
       By default, all S3 objects are private. Only the object owner has permission to access them. However, the object owner can optionally share objects with others by creating a presigned URL, using their own security credentials, to grant time-limited permission to download the objects
@@ -38,16 +44,24 @@
 14) different routing policies in aws? which policy you have used for your project?
 
 15) diff b/w cname and alias?
-           lias Record: points a host name to AWS Resource ex: myapp.mydomain.com to us-east.2.elb.amazonaws.com 
+           cname : subdomain to main domain. 
+	   alias : S3 bucket, load balancer, lambda etc.
 16) what record used for dns to ip?
-        
+        A type
 17) what kind of monitoring experiance you have?
+cloud watch. Prometheus and grafana.
 18) customer is asking you to monitor RAM of a particular instance how you are going to do that?
+if attached to k8s , then i montior thru prometheus and grafana.
+Else i write script, using free -m and send mail incase memory usage goes up.
 19) any experiance with lambda? any experiance inwriting lambda functions?
+yes i have worked with lambda. The code wil be given by developer.
 20) what is API gateway why we need it ?
 21) diff b/w cmd & entrypoint
 22) are you provisioning infrastructure for k8s or you are maintaining the k8s cluster?
+we are provisioning the infrastructure for our k8s.
 23) there are 3 replicas sets of the service that is frontend service for an application customer complaining that they cannot see the home page of the application but you check on the k8s you come to know that respective pods are coming and dying very frequently within frequent seconds how you will resolve and troubleshoot it?
+check logs of previous pods. 
+describe the 
 24) are you managing the application deplouyment as in ci/cd devops pipeline or there is a different team managing the application deployments?
 25) customer is looking for microservice which is exposed to internet so what are the diff manifest files to support this behavior?
 26) which ingrss controller your using?
